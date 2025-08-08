@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Default
+.project
+.classpath
+*.class
+bin/
+.settings/
+.idea/
+*.iml
+.DS_Store
+out/
