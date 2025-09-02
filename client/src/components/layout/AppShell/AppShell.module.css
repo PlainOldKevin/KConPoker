@@ -1,0 +1,14 @@
+.shell {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr auto auto;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    grid-template-areas:
+        "table table deck"
+        "totalStats rankStats deck"
+        "reset rankStats deck";
+
+    background: var(--default-bg);
+}
