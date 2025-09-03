@@ -1,7 +1,3 @@
-import AppShell from "./components/layout/AppShell/AppShell";
-
-function App() {
-  return <AppShell />;
-}
+function App() {}
 
 export default App;
