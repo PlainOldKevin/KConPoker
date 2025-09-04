@@ -1,0 +1,18 @@
+.reset {
+    grid-area: reset;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: #511ccc;
+    border-radius: 6px;
+    line-height: 40px;
+    display: block;
+    padding: 0;
+    width: 100%;
+}
+
+.reset:hover {
+    background-color: #7349d6;
+}

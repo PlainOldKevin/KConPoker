@@ -1,0 +1,9 @@
+.deck {
+    grid-area: deck;
+    padding: 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+    text-align: center;
+    color: black;
+    border-radius: 6px;
+}

@@ -1,3 +1,5 @@
-function App() {}
+import AppShell from "./components/AppShell/AppShell.tsx";
 
-export default App;
+export default function App() {
+  return <AppShell />;
+}
