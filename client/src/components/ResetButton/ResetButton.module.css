@@ -1,7 +1,7 @@
 .reset {
     grid-area: reset;
     outline: none;
-    border: none;
+    border: 2px solid;
     font-size: 18px;
     font-weight: 500;
     color: white;
@@ -15,4 +15,5 @@
 
 .reset:hover {
     background-color: #7349d6;
+    transition: 0.1s;
 }

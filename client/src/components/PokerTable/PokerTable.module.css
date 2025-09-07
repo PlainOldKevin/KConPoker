@@ -1,9 +1,31 @@
-.table {
+.tableArea {
     grid-area: table;
-    padding: 20px;
-    text-align: center;
-    background-color: #f5f5f5;
+    position: relative;
+    padding: 10px;
     text-align: center;
     color: black;
     border-radius: 6px;
+}
+
+.table {
+    height: 350px;
+    position: absolute;
+    background-image: linear-gradient(to bottom right, #333333, #474747, #5b5b5b);
+    width: 60%;
+    border-radius: 40%;
+    border: 3px solid #511ccc;
+    outline: 5px solid black; /* Outer border: 2px orange */
+   outline-offset: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.branding {
+    background-color: #511ccc;
+    color: white;
+    padding: 6px;
+    font-weight: bold;
+    font-size: 15px;
+    float: left
 }
