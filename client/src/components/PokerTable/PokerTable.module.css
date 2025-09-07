@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "branding";
+    src: url(src/fonts/Qilka-Bold-copy.otf);
+    font-weight: bold;
+}
+
 .tableArea {
-    grid-area: table;
+    grid-area: table; /* area on screen handled by parent*/
     position: relative;
     padding: 10px;
     text-align: center;
@@ -15,7 +21,7 @@
     border-radius: 40%;
     border: 3px solid #511ccc;
     outline: 5px solid black; /* Outer border: 2px orange */
-   outline-offset: 2px;
+    outline-offset: 2px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -26,6 +32,7 @@
     color: white;
     padding: 6px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
+    font-family: "branding";
     float: left
 }
