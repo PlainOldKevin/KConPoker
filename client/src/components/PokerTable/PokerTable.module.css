@@ -1,9 +1,3 @@
-@font-face {
-    font-family: "branding";
-    src: url(src/fonts/Qilka-Bold-copy.otf);
-    font-weight: bold;
-}
-
 .tableArea {
     grid-area: table; /* area on screen handled by parent*/
     position: relative;
@@ -16,7 +10,7 @@
 .table {
     height: 350px;
     position: absolute;
-    background-image: linear-gradient(to bottom right, #333333, #474747, #5b5b5b);
+    background-color: #2C5E17;
     width: 60%;
     border-radius: 40%;
     border: 3px solid #511ccc;
@@ -31,8 +25,6 @@
     background-color: #511ccc;
     color: white;
     padding: 6px;
-    font-weight: bold;
     font-size: 18px;
-    font-family: "branding";
     float: left
 }
