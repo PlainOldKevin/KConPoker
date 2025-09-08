@@ -16,10 +16,12 @@
     background-color: #e5e5e5;
     border: 3px solid black;
     border-radius: 6px;
-    width: 80%;
-    height: 95%;
+    width: 55px;
+    height: 57px;
     font-size: 24px;
     font-weight: bold;
+    justify-content: center;
+    padding: 5px;
 }
 
 #card:hover {
@@ -28,5 +30,5 @@
 }
 
 .hearts, .diamonds {
-    color: red;
+    color: #E51616;
 }
