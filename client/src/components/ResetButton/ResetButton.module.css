@@ -2,17 +2,19 @@
     grid-area: reset;
     outline: none;
     border: 2px solid;
-    font-size: 18px;
-    color: white;
+    font-size: 22px;
+    color: #e5e5e5;
+    font-weight: bold;
     background-color: #511ccc;
     border-radius: 6px;
-    line-height: 40px;
-    display: block;
+    border: none;
+    line-height: 45px;
     padding: 0;
     width: 100%;
 }
 
 .reset:hover {
     background-color: #7349d6;
-    transition: 0.1s;
+    transition: 0.15s;
+    cursor: pointer;
 }
