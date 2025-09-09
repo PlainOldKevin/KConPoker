@@ -16,47 +16,47 @@ export default function RankStats() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Straight Flush</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Four-of-a-Kind</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Full House</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Flush</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Straight</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Three-of-a-kind</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>Two Pair</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>One Pair</td>
             <td>0%</td>
             <td>0%</td>
           </tr>
-          <tr>
+          <tr className={styles.dataLine}>
             <td className={styles.rankTitle}>High Card</td>
             <td>0%</td>
             <td>0%</td>
