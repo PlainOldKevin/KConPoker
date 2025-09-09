@@ -2,7 +2,8 @@
     grid-area: deck;
     display: grid;
     place-items: center;
-    grid-template-columns: repeat(4, 1fr); /* Columns */
+    justify-content: center;
+    grid-template-columns: repeat(4, 55px); /* Columns */
     grid-template-rows: repeat(13, auto); /* Rows */
     padding: 20px;
     text-align: center;
