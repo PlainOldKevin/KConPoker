@@ -2,7 +2,7 @@
     display: grid;
     grid-column-gap: 30px;
     grid-row-gap: 30px;    
-    grid-template-columns: 1.5fr 1fr 0.75fr;
+    grid-template-columns: 1.5fr 1.1fr 0.65fr;
     grid-template-rows: 1fr 0.5fr auto;
     grid-template-areas:
         "table table deck"
