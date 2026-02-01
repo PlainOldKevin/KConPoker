@@ -15,7 +15,6 @@ A web app that lets users input hole cards and community cards in Texas Hold’e
 **Frontend:**
 
 - React + TypeScript
-- Axios
 
 **Backend:**
 
@@ -25,8 +24,6 @@ A web app that lets users input hole cards and community cards in Texas Hold’e
 **Other Tools:**
 
 - Git + GitHub
-- Vercel (frontend hosting)
-- Render/Railway (backend API)
 
 ## 📸 Screenshots
 
