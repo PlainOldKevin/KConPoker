@@ -1,5 +1,5 @@
 .tableArea {
-    grid-area: table; /* area on screen handled by parent*/
+    grid-area: table;
     position: relative;
     padding: 10px;
     text-align: center;

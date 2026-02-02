@@ -12,24 +12,3 @@
     color: black;
     border-radius: 6px;
 }
-
-#card {
-    background-color: #e5e5e5;
-    border: 3px solid black;
-    border-radius: 6px;
-    width: 55px;
-    height: 57px;
-    font-size: 24px;
-    font-weight: bold;
-    justify-content: center;
-    padding: 5px;
-}
-
-#card:hover {
-    border: 2px solid #511ccc;
-    cursor: pointer;
-}
-
-.hearts, .diamonds {
-    color: #E51616;
-}

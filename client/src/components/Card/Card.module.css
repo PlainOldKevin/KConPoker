@@ -1,0 +1,31 @@
+.card {
+  background-color: #e5e5e5;
+  border: 3px solid black;
+  border-radius: 6px;
+  width: 55px;
+  height: 57px;
+  font-size: 24px;
+  font-weight: bold;
+  justify-content: center;
+  padding: 5px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.card:hover:not(:disabled) {
+  border: 2px solid #511ccc;
+  cursor: pointer;
+}
+
+.redSuit {
+  color: #e51616;
+}
+
+.selected {
+  border-color: #511ccc;
+  box-shadow: 0 0 0 2px rgba(81, 28, 204, 0.3);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
