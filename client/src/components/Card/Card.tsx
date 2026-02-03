@@ -2,8 +2,8 @@ import styles from "./Card.module.css";
 import type { CardId, Rank, Suit } from "../../types/cards.ts";
 import { label } from "../../types/cards.ts";
 
+// Exactly how the card we are sending should look
 type CardProps = {
-  // Exactly how the card we are sending should look
   id: CardId;
   rank: Rank;
   suit: Suit;
