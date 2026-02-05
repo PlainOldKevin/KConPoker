@@ -35,6 +35,7 @@ export const PLAYER_HAND_SLOTS = [
   "player-8-2",
 ] as const;
 
+// Exported type of any player hand slot
 export type PlayerHandSlot = (typeof PLAYER_HAND_SLOTS)[number];
 
 // Union of all board card slots to track cards on the board
