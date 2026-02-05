@@ -1,5 +1,5 @@
 import styles from "./DeckPanel.module.css";
-import Card from "../Card/Card";
+import Card from "../PokerTable/Card/Card";
 import { RANKS, SUITS } from "../../types/cards";
 import type { CardId, Rank, Suit } from "../../types/cards";
 

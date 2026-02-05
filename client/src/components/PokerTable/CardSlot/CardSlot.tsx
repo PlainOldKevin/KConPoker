@@ -1,6 +1,6 @@
 import styles from "./CardSlot.module.css";
-import type { CardId } from "../../types/cards";
-import { label } from "../../types/cards";
+import type { CardId } from "../../../types/cards";
+import { label } from "../../../types/cards";
 
 // Form of props to be passed
 type CardSlotProps = {
