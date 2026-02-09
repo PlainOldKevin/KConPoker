@@ -23,7 +23,7 @@ type PlayerHandsProps = {
   onSlotClick: (slotId: SlotId) => void;
 };
 
-// // Renders the 8-seat ring around the table, each with two interactive card slots
+// Renders the 8-seat ring around the table, each with two interactive card slots
 export default function PlayerHands({
   assignedCards, // Shared slot -> card assignment map from AppShell
   selectedSlot, // Optional currently active slot so the selected seat card can be highlighted
