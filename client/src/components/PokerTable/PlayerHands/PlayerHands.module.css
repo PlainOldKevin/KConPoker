@@ -19,6 +19,13 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
+/* Re-enable pointer events for seat content so CardSlot buttons are clickable. */
+.player,
+.hand,
+.label {
+  pointer-events: auto;
+}
+
 /* Two-card horizontal row for a seat's hole cards. */
 .hand {
   display: flex;
@@ -34,28 +41,45 @@
 
 /* Seat anchors around the oval table (8-max layout). */
 .top {
-  top: 4%;
+  top: 0%;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .topLeft {
-  top: 16%;
-  left: 16%;
+  top: 6%;
+  left: 24%;
 }
 
 .topRight {
-  top: 16%;
-  right: 16%;
+  top: 6%;
+  right: 24%;
 }
 
 .right {
   top: 45%;
-  right: 6%;
+  right: 14%;
   transform: translateY(-50%);
 }
 
 .bottomRight {
-  bottom: 18%;
-  right: 16%;
+  bottom: 12%;
+  right: 24%;
+}
+
+.bottom {
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomLeft {
+  bottom: 12%;
+  left: 24%;
+}
+
+.left {
+  top: 45%;
+  left: 14%;
+  transform: translateY(-50%);
 }

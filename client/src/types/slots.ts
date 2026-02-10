@@ -47,6 +47,9 @@ export const BOARD_SLOTS = [
   "board-5",
 ] as const;
 
+// Union type for any single board slot
+export type BoardSlot = (typeof BOARD_SLOTS)[number];
+
 // Union of all slots across player hands + board
 export const ALL_SLOTS = [...PLAYER_HAND_SLOTS, ...BOARD_SLOTS] as const;
 
