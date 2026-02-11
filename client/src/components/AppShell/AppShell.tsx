@@ -7,10 +7,17 @@ import RankStats from "../RankStats/RankStats";
 import PlayerStats from "../PlayerStats/PlayerStats";
 import type { CardId } from "../../types/cards";
 import type { BoardSlot, PlayerHandSlot, SlotId } from "../../types/slots";
-import { BOARD_SLOTS, PLAYER_HAND_SLOTS } from "../../types/slots";
+import {
+  BOARD_SLOTS,
+  PLAYER_HAND_SLOTS,
+  PLAYER_HAND_SLOT_PAIRS,
+} from "../../types/slots";
 
-// App-level shell that wires the table, deck, and stats components together
+// App-level shell that wires table interactions, backend odds calls, and stats display
 export default function AppShell() {
+  // "Hero" is player 1 (the user). We use these slot IDs to gate auto-calculation
+  const [heroSlotA, heroSlotB] = PLAYER_HAND_SLOT_PAIRS[0];
+
   // Type guards help TS know which slot group we are dealing with
   const isBoardSlot = (slotId: SlotId): slotId is BoardSlot =>
     BOARD_SLOTS.includes(slotId as BoardSlot);
