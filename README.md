@@ -14,12 +14,12 @@ A web app that lets users input hole cards and community cards in Texas Hold’e
 
 **Frontend:**
 
-- React + TypeScript
+- React + TypeScript + Vite
 
 **Backend:**
 
-- Node.js + Express
-- `poker-odds-calc` package
+- Node.js + Express + TypeScript
+- `poker-odds-calculator` package
 
 **Other Tools:**
 
