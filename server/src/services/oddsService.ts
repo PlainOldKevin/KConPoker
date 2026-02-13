@@ -9,6 +9,6 @@ const VALID_CARD_PATTERN = /^(A|K|Q|J|10|[2-9])[shdc]$/;
 const normalizeCard = (card: string): string => {
   const rank = card.slice(0, -1);
   const suit = card.slice(-1).toLowerCase();
-  const normalizedRank = rank === "10" ? "T" : rank.toUpperCase();
+  const normalizedRank = rank === "10" ? "T" : rank;
   return `${normalizedRank}${suit}`;
 };
