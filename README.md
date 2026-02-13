@@ -82,3 +82,7 @@ npm run dev
 ```
 
 By default the frontend calls `http://localhost:3001`. Override with `VITE_API_BASE_URL` if needed.
+
+## 📸 Screenshots
+
+_(Coming soon)_
