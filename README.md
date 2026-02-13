@@ -25,6 +25,60 @@ A web app that lets users input hole cards and community cards in Texas Hold’e
 
 - Git + GitHub
 
-## 📸 Screenshots
+## 📁 Project Organization
 
-_(Coming soon)_
+```text
+client/
+  src/
+    components/       # UI building blocks
+    services/oddsApi  # HTTP calls to backend odds endpoints
+    types/            # Shared front-end type definitions
+
+server/
+  src/
+    index.ts          # Express entrypoint
+    routes/oddsRoutes # API route wiring
+    services/         # Odds + validation logic
+    types/            # Request/response contracts
+```
+
+## 🔌 Backend API
+
+### `POST /api/odds/evaluate`
+
+The frontend sends the current table state:
+
+```json
+{
+  "players": [
+    { "id": "player-1", "cards": ["Ah", "Kd"] },
+    { "id": "player-2", "cards": ["Qc", "Qs"] }
+  ],
+  "board": ["2h", "7d", "Jc"]
+}
+```
+
+The backend validates whether the state can be calculated yet.
+
+- **`canCalculate: false`**: returns validation reasons (not enough complete hands, invalid board size, duplicate cards, etc.)
+- **`canCalculate: true`**: returns per-player equity/win/tie percentages and current hand rank snapshots
+
+## ▶️ Run Locally
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+### Backend
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+By default the frontend calls `http://localhost:3001`. Override with `VITE_API_BASE_URL` if needed.
