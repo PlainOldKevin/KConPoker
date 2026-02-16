@@ -1,5 +1,7 @@
+// Imports
 import cors from "cors";
 import express from "express";
+import oddsRouter from "./routes/oddsRoutes";
 
 // Main Express app instance.
 const app = express();
@@ -15,6 +17,9 @@ app.use(express.json());
 app.get("/api/health", (_req, res) => {
   res.status(200).json({ ok: true });
 });
+
+// Mount odds endpoints under /api/odds.
+app.use("/api/odds", oddsRouter);
 
 // Start listening for HTTP requests
 app.listen(port, () => {
