@@ -13,6 +13,11 @@ const port = Number(process.env.PORT ?? 3001);
 app.use(cors());
 app.use(express.json());
 
+// API confirmation (default route)
+app.get("/", (_req, res) => {
+  res.send("API running");
+});
+
 // Lightweight health endpoint for local checks/deploy probes
 app.get("/api/health", (_req, res) => {
   res.status(200).json({ ok: true });
