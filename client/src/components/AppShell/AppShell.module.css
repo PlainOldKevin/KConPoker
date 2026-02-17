@@ -6,8 +6,8 @@
     grid-template-rows: 1fr 0.5fr auto;
     grid-template-areas:
         "table table deck"
-        "playerStats rankStats deck"
-        "reset rankStats deck";
+        "playerStats playerStats deck"
+        "reset reset deck";
     padding: 20px;
     height: 90vh;
 }

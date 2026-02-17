@@ -4,7 +4,6 @@ import styles from "./AppShell.module.css";
 import PokerTable from "../PokerTable/PokerTable";
 import DeckPanel from "../DeckPanel/DeckPanel";
 import ResetButton from "../ResetButton/ResetButton";
-import RankStats from "../RankStats/RankStats";
 import PlayerStats from "../PlayerStats/PlayerStats";
 import type { CardId } from "../../types/cards";
 import type { OddsRequest, OddsResponse } from "../../types/odds";
@@ -203,7 +202,6 @@ export default function AppShell() {
         onSlotClick={handleSlotClick}
       />
       <DeckPanel usedCards={usedCards} onCardClick={handleCardClick} />
-      <RankStats />
       <PlayerStats
         yourWinPct={yourWinPct}
         yourTiePct={yourTiePct}
