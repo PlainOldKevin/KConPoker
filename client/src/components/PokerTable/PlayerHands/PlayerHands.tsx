@@ -43,7 +43,9 @@ export default function PlayerHands({
             className={`${styles.player} ${styles[position]}`}
           >
             {/* Seat label (Player1..Player8) */}
-            <span className={styles.label}>{`Player ${index + 1}`}</span>
+            <span className={styles.label}>
+              {index === 0 ? `You` : `Player ${index + 1}`}
+            </span>
             <div className={styles.hand}>
               {/* Placeholder slots for player cards. */}
               <CardSlot
