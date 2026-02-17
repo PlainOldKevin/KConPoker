@@ -1,4 +1,5 @@
-import { useState } from "react";
+// Imports
+import { useEffect, useMemo, useState } from "react";
 import styles from "./AppShell.module.css";
 import PokerTable from "../PokerTable/PokerTable";
 import DeckPanel from "../DeckPanel/DeckPanel";
@@ -6,6 +7,8 @@ import ResetButton from "../ResetButton/ResetButton";
 import RankStats from "../RankStats/RankStats";
 import PlayerStats from "../PlayerStats/PlayerStats";
 import type { CardId } from "../../types/cards";
+import type { OddsRequest, OddsResponse } from "../../types/odds";
+import { evaluateOdds } from "../../services/oddsApi";
 import type { BoardSlot, PlayerHandSlot, SlotId } from "../../types/slots";
 import {
   BOARD_SLOTS,
@@ -15,9 +18,6 @@ import {
 
 // App-level shell that wires table interactions, backend odds calls, and stats display
 export default function AppShell() {
-  // "Hero" is player 1 (the user). We use these slot IDs to gate auto-calculation
-  const [heroSlotA, heroSlotB] = PLAYER_HAND_SLOT_PAIRS[0];
-
   // Type guards help TS know which slot group we are dealing with
   const isBoardSlot = (slotId: SlotId): slotId is BoardSlot =>
     BOARD_SLOTS.includes(slotId as BoardSlot);
@@ -25,15 +25,80 @@ export default function AppShell() {
   const isPlayerHandSlot = (slotId: SlotId): slotId is PlayerHandSlot =>
     PLAYER_HAND_SLOTS.includes(slotId as PlayerHandSlot);
 
-  // Currently active slot to receive the next dealt card from the deck
+  // Active slot to receive the next dealt card from the deck (handle deck clicks)
   const [selectedSlot, setSelectedSlot] = useState<SlotId | undefined>();
 
-  // Map of slot id -> assigned card id for both hand and board slots
+  // Map of slot id -> assigned card id for both hand and board slots (Current table state)
   const [assignedCards, setAssignedCards] = useState<
     Partial<Record<SlotId, CardId>>
   >({});
 
-  // When a deck card is clicked, snap it into the active slot and advance
+  // "Hero" is player 1 (the user); these slot IDs gate auto-calculation
+  const [heroSlotA, heroSlotB] = PLAYER_HAND_SLOT_PAIRS[0];
+
+  // Only run backend odds when hero has a complete two-card hand
+  const heroHasCompleteHand =
+    Boolean(assignedCards[heroSlotA]) && Boolean(assignedCards[heroSlotB]);
+
+  // Last backend response for odds calculations
+  const [oddsResponse, setOddsResponse] = useState<OddsResponse | undefined>();
+
+  /* Function to build compute eligibility + API payload from current table state */
+
+  // Derive backend request payload from assigned card slots
+  const oddsRequest = useMemo<OddsRequest>(() => {
+    // Build players in seat order, keeping only seats that currently have cards
+    const players = PLAYER_HAND_SLOT_PAIRS.map(([slotA, slotB], index) => {
+      const cards = [assignedCards[slotA], assignedCards[slotB]].filter(
+        // Remove undefined values when one/both hand slots are empty
+        (card): card is CardId => Boolean(card),
+      );
+
+      return {
+        id: `player-${index + 1}`,
+        cards,
+      };
+    }).filter((player) => player.cards.length > 0);
+
+    // Board cards are sent in order (flop/turn/river slots)
+    const board = BOARD_SLOTS.map((slot) => assignedCards[slot]).filter(
+      (card): card is CardId => Boolean(card),
+    );
+
+    return { players, board };
+  }, [assignedCards]);
+
+  // Auto-evaluate odds whenever table state changes and hero is complete
+  useEffect(() => {
+    // If hero is incomplete, clear displayed results and skip network call
+    if (!heroHasCompleteHand) {
+      setOddsResponse(undefined);
+      return;
+    }
+
+    // Send request
+    const runOdds = async () => {
+      try {
+        const response = await evaluateOdds(oddsRequest);
+        // Assign request
+        setOddsResponse(response);
+      } catch {
+        // Keep UI stable on network/backend errors
+        setOddsResponse(undefined);
+      }
+    };
+
+    runOdds();
+  }, [heroHasCompleteHand, oddsRequest]);
+
+  // Derive current panel values from hero row in backend response
+  const hero = oddsResponse?.players[0];
+  const yourWinPct = hero?.winPct ?? 0;
+  const yourTiePct = hero?.tiePct ?? 0;
+  const othersWinPct = Math.max(100 - yourWinPct - yourTiePct, 0);
+  const othersTiePct = yourTiePct;
+
+  // When a deck card is clicked, assign it into currently selected slot and advance
   const handleCardClick = (id: CardId) => {
     if (!selectedSlot) {
       // Ignore deck clicks until a slot is selected
@@ -139,7 +204,12 @@ export default function AppShell() {
       />
       <DeckPanel usedCards={usedCards} onCardClick={handleCardClick} />
       <RankStats />
-      <PlayerStats />
+      <PlayerStats
+        yourWinPct={yourWinPct}
+        yourTiePct={yourTiePct}
+        othersWinPct={othersWinPct}
+        othersTiePct={othersTiePct}
+      />
       <ResetButton />
     </div>
   );

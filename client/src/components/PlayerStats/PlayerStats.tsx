@@ -1,28 +1,47 @@
 import styles from "./PlayerStats.module.css";
 
-export default function PlayerStats() {
+// Props are split as "you" and "others" so this component stays presentation-only
+interface PlayerStatsProps {
+  yourWinPct: number;
+  yourTiePct: number;
+  othersWinPct: number;
+  othersTiePct: number;
+}
+
+// Shared display formatter for odds values
+const formatPct = (value: number) => `${value.toFixed(2)}%`;
+
+export default function PlayerStats({
+  yourWinPct,
+  yourTiePct,
+  othersWinPct,
+  othersTiePct,
+}: PlayerStatsProps) {
   return (
     <div className={styles.player}>
       <table className={styles.table}>
         <thead>
-          <th className={styles.tableTitle}>
-            <span>You</span>
-          </th>
-          <th></th>
-          <th className={styles.tableTitle}>
-            <span>Others</span>
-          </th>
+          <tr>
+            <th className={styles.tableTitle}>
+              <span>You</span>
+            </th>
+            {/* Spacer header used by middle label column (Win/Tie) */}
+            <th></th>
+            <th className={styles.tableTitle}>
+              <span>Others</span>
+            </th>
+          </tr>
         </thead>
         <tbody>
           <tr>
-            <td className={styles.tableWinOdds}>0%</td>
+            <td className={styles.tableWinOdds}>{formatPct(yourWinPct)}</td>
             <td className={styles.tableWin}>Win</td>
-            <td className={styles.tableWinOdds}>0%</td>
+            <td className={styles.tableWinOdds}>{formatPct(othersWinPct)}</td>
           </tr>
           <tr>
-            <td className={styles.tableTieOdds}>0%</td>
+            <td className={styles.tableTieOdds}>{formatPct(yourTiePct)}</td>
             <td className={styles.tableTie}>Tie</td>
-            <td className={styles.tableTieOdds}>0%</td>
+            <td className={styles.tableTieOdds}>{formatPct(othersTiePct)}</td>
           </tr>
         </tbody>
       </table>
