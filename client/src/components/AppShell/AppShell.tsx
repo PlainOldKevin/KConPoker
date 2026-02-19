@@ -40,10 +40,12 @@ export default function AppShell() {
     Boolean(assignedCards[heroSlotA]) && Boolean(assignedCards[heroSlotB]);
 
   // Last backend response for odds calculations
-  const [oddsResponse, setOddsResponse] = useState<OddsResponse | undefined>();
+  // This remains stable through invalid states while users edit cards
+  const [lastValidOddsResponse, setLastValidOddsResponse] = useState<
+    OddsResponse | undefined
+  >();
 
   /* Function to build compute eligibility + API payload from current table state */
-
   // Derive backend request payload from assigned card slots
   const oddsRequest = useMemo<OddsRequest>(() => {
     // Build players in seat order, keeping only seats that currently have cards
@@ -67,11 +69,30 @@ export default function AppShell() {
     return { players, board };
   }, [assignedCards]);
 
-  // Auto-evaluate odds whenever table state changes and hero is complete
+  // Total players with 2 cards
+  const completePlayerCount = oddsRequest.players.filter(
+    (player) => player.cards.length === 2,
+  ).length;
+
+  // A "partial" player hand (exactly one card) means table state is in-between edits (thus re-calculation is avoided)
+  const hasIncompletePlayer = oddsRequest.players.some(
+    (player) => player.cards.length === 1,
+  );
+
+  // 0 cards on the board or at least a flop
+  const isValidBoardCount = [0, 3, 4, 5].includes(oddsRequest.board.length);
+
+  // Only request fresh odds when the table state is fully calculation-ready
+  const canRequestOdds =
+    heroHasCompleteHand &&
+    completePlayerCount >= 2 &&
+    !hasIncompletePlayer &&
+    isValidBoardCount;
+
+  // Auto-evaluate odds whenever table state is valid
   useEffect(() => {
-    // If hero is incomplete, clear displayed results and skip network call
-    if (!heroHasCompleteHand) {
-      setOddsResponse(undefined);
+    // If state is not calculation-ready, keep prior odds visible and skip reques
+    if (!canRequestOdds) {
       return;
     }
 
@@ -79,23 +100,25 @@ export default function AppShell() {
     const runOdds = async () => {
       try {
         const response = await evaluateOdds(oddsRequest);
-        // Assign request
-        setOddsResponse(response);
+        /* Update displayed odds only when backend confirms a valid calculation
+           If response is invalid, keep prior valid odds visible  */
+        if (response.canCalculate) {
+          setLastValidOddsResponse(response);
+        }
       } catch {
-        // Keep UI stable on network/backend errors
-        setOddsResponse(undefined);
+        // Keep last known-good odds on transient network/backend errors
       }
     };
 
     runOdds();
-  }, [heroHasCompleteHand, oddsRequest]);
+  }, [canRequestOdds, oddsRequest]);
 
-  // Derive current panel values from hero row in backend response
-  const hero = oddsResponse?.players[0];
-  const yourWinPct = hero?.winPct ?? 0;
-  const yourTiePct = hero?.tiePct ?? 0;
-  const othersWinPct = Math.max(100 - yourWinPct - yourTiePct, 0);
-  const othersTiePct = yourTiePct;
+  // Derive current panel values from backend response
+  const hero = lastValidOddsResponse?.players[0];
+  const yourWinPct = hero ? hero.winPct : 0;
+  const yourTiePct = hero ? hero.tiePct : 0;
+  const othersWinPct = hero ? Math.max(100 - yourWinPct - yourTiePct, 0) : 0;
+  const othersTiePct = hero ? yourTiePct : 0;
 
   // When a deck card is clicked, assign it into currently selected slot and advance
   const handleCardClick = (id: CardId) => {
