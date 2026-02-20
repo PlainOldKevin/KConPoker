@@ -1,4 +1,4 @@
-# Poker Odds Calculator
+# KConPoker - Poker Odds Calculator
 
 A web app that lets users input hole cards and community cards in Texas Hold’em, and calculates win/tie/lose probabilities for each player.
 
