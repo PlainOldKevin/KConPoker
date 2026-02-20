@@ -41,3 +41,22 @@ test("evaluateOdds returns ready for a valid preflop request", () => {
   assert.equal(result.players[0].id, "player-1");
   assert.ok(typeof result.players[0].equityPct === "number");
 });
+
+test("evaluateOdds gives both players non-zero and equal win chance for identical pocket pairs", () => {
+  const result = evaluateOdds({
+    players: [
+      { id: "player-1", cards: ["Ah", "Ad"] },
+      { id: "player-2", cards: ["As", "Ac"] },
+    ],
+    board: [],
+  });
+
+  assert.equal(result.status, "ready");
+  assert.equal(result.canCalculate, true);
+  assert.equal(result.players.length, 2);
+
+  const [hero, villain] = result.players;
+  assert.ok(hero.winPct > 0);
+  assert.equal(hero.winPct, villain.winPct);
+  assert.equal(hero.tiePct, villain.tiePct);
+});

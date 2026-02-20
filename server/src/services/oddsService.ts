@@ -133,7 +133,7 @@ export const evaluateOdds = (payload: OddsRequest): OddsResponse => {
       cards: player.cards,
       equityPct: roundPercentages(equity),
       tiePct: roundPercentages(tie),
-      winPct: roundPercentages(Math.max(equity - tie, 0)),
+      winPct: roundPercentages(equity),
       handRank: calculation.getHandRank(index).toString(),
     };
   });

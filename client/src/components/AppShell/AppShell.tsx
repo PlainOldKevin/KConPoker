@@ -115,9 +115,9 @@ export default function AppShell() {
 
   // Derive current panel values from backend response
   const hero = lastValidOddsResponse?.players[0];
-  const yourWinPct = hero ? hero.winPct : 0;
+  const yourWinPct = hero ? hero.equityPct : 0;
   const yourTiePct = hero ? hero.tiePct : 0;
-  const othersWinPct = hero ? Math.max(100 - yourWinPct - yourTiePct, 0) : 0;
+  const othersWinPct = hero ? 100 - yourWinPct - yourTiePct : 0;
   const othersTiePct = hero ? yourTiePct : 0;
 
   // When a deck card is clicked, assign it into currently selected slot and advance
