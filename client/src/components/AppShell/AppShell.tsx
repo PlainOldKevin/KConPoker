@@ -212,6 +212,13 @@ export default function AppShell() {
     setSelectedSlot((prev) => (prev === slotId ? undefined : slotId));
   };
 
+  // Restore app to its initial state (as on first load)
+  const handleReset = () => {
+    setAssignedCards({});
+    setSelectedSlot(undefined);
+    setLastValidOddsResponse(undefined);
+  };
+
   // Used card list for disabling them in the deck
   const usedCards = Object.values(assignedCards).filter(
     (cardId): cardId is CardId => Boolean(cardId),
@@ -231,7 +238,7 @@ export default function AppShell() {
         othersWinPct={othersWinPct}
         othersTiePct={othersTiePct}
       />
-      <ResetButton />
+      <ResetButton onReset={handleReset} />
     </div>
   );
 }
