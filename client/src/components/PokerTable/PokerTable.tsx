@@ -20,7 +20,7 @@ export default function PokerTable({
 }: PokerTableProps) {
   return (
     <div className={styles.tableArea}>
-      <span className={styles.branding}>KConPoker.io</span>
+      <span className={styles.branding}>KConPoker</span>
       {/* Felt surface */}
       <div className={styles.table}></div>
       {/* Player hands arrayed around the table edge */}
