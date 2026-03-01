@@ -9,7 +9,7 @@ interface PlayerStatsProps {
 }
 
 // Shared display formatter for odds values
-const formatPct = (value: number) => `${value.toFixed(2)}%`;
+const formatPct = (value: number) => `${value}%`;
 
 export default function PlayerStats({
   yourWinPct,

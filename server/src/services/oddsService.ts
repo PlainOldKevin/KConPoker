@@ -34,7 +34,7 @@ const normalizeCard = (card: string): string => {
 const isValidCard = (card: string): boolean => VALID_CARD_PATTERN.test(card);
 
 // Numeric output for UI percentages
-const roundPercentages = (value: number): number => Number(value.toFixed(2));
+//const roundPercentages = (value: number): number => Number(value.toFixed(2));
 
 // Main function of this service file: validates request and computes odds/returns errors
 export const evaluateOdds = (payload: OddsRequest): OddsResponse => {
@@ -131,9 +131,9 @@ export const evaluateOdds = (payload: OddsRequest): OddsResponse => {
     return {
       id: player.id,
       cards: player.cards,
-      equityPct: roundPercentages(equity),
-      tiePct: roundPercentages(tie),
-      winPct: roundPercentages(equity),
+      equityPct: equity,
+      tiePct: tie,
+      winPct: equity,
       handRank: calculation.getHandRank(index).toString(),
     };
   });
